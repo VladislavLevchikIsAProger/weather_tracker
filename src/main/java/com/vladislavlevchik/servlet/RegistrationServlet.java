@@ -40,7 +40,7 @@ public class RegistrationServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         UserRequestDto userRequestDto = UserRequestDto.builder()
                 .login(req.getParameter("login"))
                 .password(req.getParameter("password"))
@@ -64,7 +64,6 @@ public class RegistrationServlet extends HttpServlet {
         userRepository.save(user);
 
         Session session = Session.builder()
-//                .id(UUID.randomUUID())
                 .user(user)
                 .expiresAt(LocalDateTime.now().plusHours(24))
                 .build();
@@ -73,11 +72,7 @@ public class RegistrationServlet extends HttpServlet {
 
         Cookie cookie = new Cookie("sessionId", session.getId().toString());
         resp.addCookie(cookie);
-//
-//
-//        context.setVariable("username", user.getLogin());
-//        context.setVariable("password", user.getPassword());
 
-        templateEngine.process("home", context, resp.getWriter());
+        resp.sendRedirect("/home");
     }
 }
