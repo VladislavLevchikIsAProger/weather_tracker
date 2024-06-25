@@ -1,10 +1,17 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Registration</title>
+    <title>Home</title>
 </head>
 <body>
-<P> <label th:text="${username}"></label> </P>
-<P> <label th:text="${password}"></label> </P>
+<div th:if="${isLoggedIn}">
+    <p>Welcome, <span th:text="${login}">User</span>!</p>
+    <form action="/logout" method="post">
+        <button type="submit">Logout</button>
+    </form>
+</div>
+<div th:if="${!isLoggedIn}">
+    <p>Please <a href="/login">login</a></p>
+</div>
 </body>
 </html>
