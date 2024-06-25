@@ -19,7 +19,6 @@ import org.thymeleaf.web.servlet.JakartaServletWebApplication;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 @WebServlet("/registration")
 public class RegistrationServlet extends HttpServlet {
@@ -71,6 +70,7 @@ public class RegistrationServlet extends HttpServlet {
         sessionRepository.save(session);
 
         Cookie cookie = new Cookie("sessionId", session.getId().toString());
+        cookie.setMaxAge(60 * 60 * 24);
         resp.addCookie(cookie);
 
         resp.sendRedirect("/home");
