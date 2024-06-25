@@ -21,15 +21,20 @@ public abstract class BaseRepository<E, K> implements CrudRepository<E, K> {
 
     @Override
     public Optional<E> findById(K id) {
-        return Optional.empty();
+        try (Session session = sessionFactory.openSession()) {
+            return Optional.ofNullable(session.find(clazz, id));
+        }
     }
 
     @Override
     public E save(E entity) {
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
+
             session.save(entity);
+
             session.getTransaction().commit();
+
             return entity;
         }
     }
