@@ -8,6 +8,7 @@ import com.vladislavlevchik.repository.SessionRepository;
 import jakarta.servlet.http.Cookie;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -20,28 +21,17 @@ public class AuthorizationService {
             throw new EmptyCookieException();
         }
 
-        String sessionId = null;
-        for (Cookie cookie : cookies) {
-            if (cookie.getName().equals("sessionId")) {
-                sessionId = cookie.getValue();
-                break;
-            }
-        }
-
-        if (sessionId == null) {
-            throw new SessionIdNotFoundException();
-        }
-
-        return sessionId;
+        return Arrays.stream(cookies)
+                .filter(cookie -> "sessionId".equals(cookie.getName()))
+                .map(Cookie::getValue)
+                .findFirst()
+                .orElseThrow(SessionIdNotFoundException::new);
     }
 
     public Session getSessionIfValid(String sessionId) {
-        Optional<Session> optionalSession = sessionRepository.findById(UUID.fromString(sessionId));
-        if (optionalSession.isEmpty()) {
-            throw new SessionIdNotFoundException();
-        }
+        Session session = sessionRepository.findById(UUID.fromString(sessionId))
+                .orElseThrow(SessionIdNotFoundException::new);
 
-        Session session = optionalSession.get();
         if (session.getExpiresAt().isBefore(LocalDateTime.now())) {
             throw new SessionExpiredException();
         }
