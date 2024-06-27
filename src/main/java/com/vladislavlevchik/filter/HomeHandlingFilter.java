@@ -14,8 +14,8 @@ import org.thymeleaf.web.servlet.JakartaServletWebApplication;
 
 import java.io.IOException;
 
-@WebFilter("/*")
-public class ExceptionHandlingFilter extends HttpFilter {
+@WebFilter("/home")
+public class HomeHandlingFilter extends HttpFilter {
 
     @Override
     protected void doFilter(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws IOException, ServletException {
