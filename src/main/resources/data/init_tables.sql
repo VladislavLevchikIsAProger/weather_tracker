@@ -1,9 +1,9 @@
 -- Создание таблицы Users
 CREATE TABLE Users
 (
-    ID       SERIAL PRIMARY KEY,    -- Айди пользователя, автоинкремент, первичный ключ
-    Login    VARCHAR(255) NOT NULL, -- Логин пользователя, username или email
-    Password VARCHAR(255) NOT NULL  -- Пароль пользователя (должен храниться в зашифрованном виде)
+    ID       SERIAL PRIMARY KEY,           -- Айди пользователя, автоинкремент, первичный ключ
+    Login    VARCHAR(255) UNIQUE NOT NULL, -- Логин пользователя, username или email
+    Password VARCHAR(255)        NOT NULL  -- Пароль пользователя (должен храниться в зашифрованном виде)
 );
 
 -- Создание таблицы Locations
