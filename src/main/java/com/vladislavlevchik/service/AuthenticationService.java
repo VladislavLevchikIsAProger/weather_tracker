@@ -36,12 +36,6 @@ public class AuthenticationService {
         return sessionRepository.save(session);
     }
 
-    public void checkUserNotExistsByLogin(String login) {
-        if(userRepository.findByLogin(login).isPresent()){
-            throw new UserAlreadyExistException();
-        }
-    }
-
     public Cookie findSessionIdCookie(Cookie[] cookies) {
         if (cookies == null || cookies.length < 1) {
             throw new CookieNotFoundException();
