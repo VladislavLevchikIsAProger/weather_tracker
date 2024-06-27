@@ -1,7 +1,7 @@
 package com.vladislavlevchik.servlet;
 
 import com.vladislavlevchik.entity.Session;
-import com.vladislavlevchik.service.AuthorizationService;
+import com.vladislavlevchik.service.AuthenticationService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -16,7 +16,7 @@ import java.io.IOException;
 
 @WebServlet("/home")
 public class HomeServlet extends HttpServlet {
-    private final AuthorizationService authorizationService = new AuthorizationService();
+    private final AuthenticationService authenticationService = new AuthenticationService();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -26,9 +26,9 @@ public class HomeServlet extends HttpServlet {
 
         WebContext context = new WebContext(webExchange);
 
-        String sessionId = authorizationService.findSessionIdInCookies(req.getCookies());
+        String sessionId = authenticationService.findSessionIdCookie(req.getCookies()).getValue();
 
-        Session session = authorizationService.getSessionIfValid(sessionId);
+        Session session = authenticationService.getSessionIfValid(sessionId);
 
         context.setVariable("isLoggedIn", true);
         context.setVariable("login", session.getUser().getLogin());
