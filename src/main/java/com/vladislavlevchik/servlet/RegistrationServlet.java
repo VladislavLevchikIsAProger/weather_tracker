@@ -5,7 +5,7 @@ import com.vladislavlevchik.entity.Session;
 import com.vladislavlevchik.entity.User;
 import com.vladislavlevchik.repository.SessionRepository;
 import com.vladislavlevchik.repository.UserRepository;
-import com.vladislavlevchik.utils.MapperUtil;
+import com.vladislavlevchik.service.AuthenticationService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.Cookie;
@@ -20,12 +20,9 @@ import org.thymeleaf.web.servlet.JakartaServletWebApplication;
 import java.io.IOException;
 import java.time.LocalDateTime;
 
-@WebServlet("/registration")
+@WebServlet("/sign-up")
 public class RegistrationServlet extends HttpServlet {
-
-    private final UserRepository userRepository = new UserRepository();
-
-    private final SessionRepository sessionRepository = new SessionRepository();
+    private final AuthenticationService authenticationService = new AuthenticationService();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -38,6 +35,7 @@ public class RegistrationServlet extends HttpServlet {
         templateEngine.process("signup", context, resp.getWriter());
     }
 
+    //TODO добавить хэширование пароля
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         UserRequestDto userRequestDto = UserRequestDto.builder()
@@ -45,29 +43,9 @@ public class RegistrationServlet extends HttpServlet {
                 .password(req.getParameter("password"))
                 .build();
 
-        TemplateEngine templateEngine = (TemplateEngine) getServletContext().getAttribute("templateEngine");
+        User user = authenticationService.saveUser(userRequestDto);
 
-        IWebExchange webExchange = JakartaServletWebApplication.buildApplication(getServletContext())
-                .buildExchange(req, resp);
-
-        WebContext context = new WebContext(webExchange);
-
-        if (userRepository.findByLogin(userRequestDto.getLogin()).isPresent()) {
-            context.setVariable("error", "login is already in use");
-            templateEngine.process("signup", context, resp.getWriter());
-            return;
-        }
-
-        User user = MapperUtil.convertToEntity(userRequestDto);
-
-        userRepository.save(user);
-
-        Session session = Session.builder()
-                .user(user)
-                .expiresAt(LocalDateTime.now().plusHours(24))
-                .build();
-
-        sessionRepository.save(session);
+        Session session = authenticationService.saveSession(user);
 
         Cookie cookie = new Cookie("sessionId", session.getId().toString());
         cookie.setMaxAge(60 * 60 * 24);
