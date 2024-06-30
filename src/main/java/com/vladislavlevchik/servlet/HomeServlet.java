@@ -19,7 +19,7 @@ public class HomeServlet extends HttpServlet {
     private final AuthenticationService authenticationService = new AuthenticationService();
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         TemplateEngine templateEngine = (TemplateEngine) getServletContext().getAttribute("templateEngine");
         IWebExchange webExchange = JakartaServletWebApplication.buildApplication(getServletContext())
                 .buildExchange(req, resp);
@@ -30,7 +30,7 @@ public class HomeServlet extends HttpServlet {
 
         Session session = authenticationService.getSessionIfValid(sessionId);
 
-        context.setVariable("isLoggedIn", true);
+//        context.setVariable("isLoggedIn", true);
         context.setVariable("login", session.getUser().getLogin());
 
         templateEngine.process("home", context, resp.getWriter());
