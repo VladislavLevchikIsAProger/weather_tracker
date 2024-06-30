@@ -1,4 +1,4 @@
 package com.vladislavlevchik.exception;
 
-public class AuthorizationException extends RuntimeException{
+public abstract class AuthorizationException extends RuntimeException{
 }
