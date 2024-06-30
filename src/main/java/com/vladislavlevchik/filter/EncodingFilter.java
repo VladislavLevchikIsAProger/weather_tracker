@@ -11,10 +11,6 @@ import java.io.IOException;
 
 @WebFilter("/*")
 public class EncodingFilter extends HttpFilter {
-    @Override
-    public void init() throws ServletException {
-        super.init();
-    }
 
     @Override
     protected void doFilter(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws IOException, ServletException {
