@@ -29,7 +29,6 @@ public class HomeHandlingFilter extends HttpFilter {
         try {
             super.doFilter(req, res, chain);
         } catch (AuthorizationException e) {
-            context.setVariable("isLoggedIn", false);
             templateEngine.process("home", context, res.getWriter());
         }
     }
