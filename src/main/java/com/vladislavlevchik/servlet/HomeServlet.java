@@ -2,7 +2,6 @@ package com.vladislavlevchik.servlet;
 
 import com.vladislavlevchik.entity.Session;
 import com.vladislavlevchik.service.AuthenticationService;
-import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -30,7 +29,6 @@ public class HomeServlet extends HttpServlet {
 
         Session session = authenticationService.getSessionIfValid(sessionId);
 
-//        context.setVariable("isLoggedIn", true);
         context.setVariable("login", session.getUser().getLogin());
 
         templateEngine.process("home", context, resp.getWriter());
