@@ -4,15 +4,14 @@
     <title>Home</title>
 </head>
 <body>
-<div th:if="${isLoggedIn}">
+<div th:if="${login != null}">
     <p>Welcome, <span th:text="${login}">User</span>!</p>
     <form action="/logout" method="post">
         <button type="submit">Logout</button>
     </form>
 </div>
-<div th:if="${!isLoggedIn}">
-    <!--    <p>Please <a href="/login">login</a></p>-->
-    <form action="/signin" method="post">
+<div th:if="${login == null}">
+    <form action="/sign-in" method="get">
         <button type="submit">Login</button>
     </form>
 </div>
