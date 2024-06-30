@@ -18,7 +18,7 @@ import java.io.IOException;
 
 
 @WebServlet("/sign-up")
-public class RegistrationServlet extends HttpServlet {
+public class SignUpServlet extends HttpServlet {
     private final AuthenticationService authenticationService = new AuthenticationService();
 
     @Override
