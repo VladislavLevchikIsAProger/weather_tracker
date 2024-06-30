@@ -1,4 +1,4 @@
-package com.vladislavlevchik.servlet;
+package com.vladislavlevchik.servlet.authentication;
 
 import com.vladislavlevchik.dto.UserRequestDto;
 import com.vladislavlevchik.entity.Session;
@@ -16,9 +16,9 @@ import org.thymeleaf.web.servlet.JakartaServletWebApplication;
 
 import java.io.IOException;
 
+@WebServlet("/sign-in")
+public class SignInServlet extends HttpServlet {
 
-@WebServlet("/sign-up")
-public class SignUpServlet extends HttpServlet {
     private final AuthenticationService authenticationService = new AuthenticationService();
 
     @Override
@@ -29,10 +29,9 @@ public class SignUpServlet extends HttpServlet {
 
         WebContext context = new WebContext(webExchange);
 
-        templateEngine.process("signup", context, resp.getWriter());
+        templateEngine.process("signin", context, resp.getWriter());
     }
 
-    //TODO мб  упростить через вынос кук в Basic класс
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         UserRequestDto userRequestDto = UserRequestDto.builder()
@@ -40,7 +39,7 @@ public class SignUpServlet extends HttpServlet {
                 .password(req.getParameter("password"))
                 .build();
 
-        User user = authenticationService.saveUser(userRequestDto);
+        User user = authenticationService.getUserByLoginIfValid(userRequestDto);
 
         Session session = authenticationService.saveSession(user);
 

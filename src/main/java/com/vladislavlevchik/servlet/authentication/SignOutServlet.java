@@ -1,4 +1,4 @@
-package com.vladislavlevchik.servlet;
+package com.vladislavlevchik.servlet.authentication;
 
 import com.vladislavlevchik.service.AuthenticationService;
 import jakarta.servlet.annotation.WebServlet;
