@@ -4,18 +4,12 @@
     <meta charset="UTF-8">
     <title>Registration</title>
 
-    <style>
-        .error {
-            color: red;
-        }
-    </style>
-
 </head>
 <body>
 
 <form th:action="@{/sign-up}" method="post">
-    <div th:if="${error}" class="error">
-        <p th:text="${error}"></p>
+    <div th:if="${param.error}" style="color: red;">
+        Login is already in use
     </div>
     <label for="login">Username:</label>
     <input type="text" id="login" name="login" required><br>
