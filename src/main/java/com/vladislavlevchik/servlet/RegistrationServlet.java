@@ -3,10 +3,7 @@ package com.vladislavlevchik.servlet;
 import com.vladislavlevchik.dto.UserRequestDto;
 import com.vladislavlevchik.entity.Session;
 import com.vladislavlevchik.entity.User;
-import com.vladislavlevchik.repository.SessionRepository;
-import com.vladislavlevchik.repository.UserRepository;
 import com.vladislavlevchik.service.AuthenticationService;
-import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
@@ -18,14 +15,14 @@ import org.thymeleaf.web.IWebExchange;
 import org.thymeleaf.web.servlet.JakartaServletWebApplication;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
+
 
 @WebServlet("/sign-up")
 public class RegistrationServlet extends HttpServlet {
     private final AuthenticationService authenticationService = new AuthenticationService();
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         TemplateEngine templateEngine = (TemplateEngine) getServletContext().getAttribute("templateEngine");
         IWebExchange webExchange = JakartaServletWebApplication.buildApplication(getServletContext())
                 .buildExchange(req, resp);
@@ -35,7 +32,7 @@ public class RegistrationServlet extends HttpServlet {
         templateEngine.process("signup", context, resp.getWriter());
     }
 
-    //TODO добавить хэширование пароля
+    //TODO мб  упростить через вынос кук в Basic класс
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         UserRequestDto userRequestDto = UserRequestDto.builder()
