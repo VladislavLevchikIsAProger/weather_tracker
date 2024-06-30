@@ -5,7 +5,7 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletResponse;
 
-public class WeatherTrackerBaseServlet extends HttpServlet {
+public abstract class WeatherTrackerBaseServlet extends HttpServlet {
 
     public void addCookie(HttpServletResponse resp, Session session){
         Cookie cookie = new Cookie("sessionId", session.getId().toString());
