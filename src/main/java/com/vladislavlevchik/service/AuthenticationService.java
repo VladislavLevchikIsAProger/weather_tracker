@@ -3,19 +3,19 @@ package com.vladislavlevchik.service;
 import com.vladislavlevchik.dto.UserRequestDto;
 import com.vladislavlevchik.entity.Session;
 import com.vladislavlevchik.entity.User;
-import com.vladislavlevchik.exception.SessionIdNotFoundException;
-import com.vladislavlevchik.exception.CookieNotFoundException;
-import com.vladislavlevchik.exception.SessionExpiredException;
-import com.vladislavlevchik.exception.UserAlreadyExistException;
+import com.vladislavlevchik.exception.*;
 import com.vladislavlevchik.repository.SessionRepository;
 import com.vladislavlevchik.repository.UserRepository;
 import jakarta.servlet.http.Cookie;
+import org.mindrot.jbcrypt.BCrypt;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.UUID;
 
 import static com.vladislavlevchik.utils.MapperUtil.convertToEntity;
+import static org.mindrot.jbcrypt.BCrypt.checkpw;
+import static org.mindrot.jbcrypt.BCrypt.hashpw;
 
 public class AuthenticationService {
 
@@ -23,11 +23,14 @@ public class AuthenticationService {
 
     private final UserRepository userRepository = new UserRepository();
 
-    public User saveUser(UserRequestDto user){
+    public User saveUser(UserRequestDto user) {
+        String hashedPassword = hashpw(user.getPassword(), BCrypt.gensalt());
+        user.setPassword(hashedPassword);
+
         return userRepository.save(convertToEntity(user));
     }
 
-    public Session saveSession(User user){
+    public Session saveSession(User user) {
         Session session = Session.builder()
                 .user(user)
                 .expiresAt(LocalDateTime.now().plusHours(24))
@@ -60,5 +63,16 @@ public class AuthenticationService {
 
     public void deleteSession(String uuid) {
         sessionRepository.deleteById(UUID.fromString(uuid));
+    }
+
+    public User getUserByLoginIfValid(UserRequestDto userRequestDto) {
+        User user = userRepository.findByLogin(userRequestDto.getLogin())
+                .orElseThrow(UserNotFoundByLoginException::new);
+
+        if (!checkpw(userRequestDto.getPassword(), user.getPassword())) {
+            throw new IncorrectPasswordException();
+        }
+
+        return user;
     }
 }
