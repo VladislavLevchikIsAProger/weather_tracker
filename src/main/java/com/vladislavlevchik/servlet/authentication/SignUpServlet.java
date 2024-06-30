@@ -4,6 +4,7 @@ import com.vladislavlevchik.dto.UserRequestDto;
 import com.vladislavlevchik.entity.Session;
 import com.vladislavlevchik.entity.User;
 import com.vladislavlevchik.service.AuthenticationService;
+import com.vladislavlevchik.servlet.WeatherTrackerBaseServlet;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
@@ -18,7 +19,7 @@ import java.io.IOException;
 
 
 @WebServlet("/sign-up")
-public class SignUpServlet extends HttpServlet {
+public class SignUpServlet extends WeatherTrackerBaseServlet {
     private final AuthenticationService authenticationService = new AuthenticationService();
 
     @Override
@@ -32,7 +33,6 @@ public class SignUpServlet extends HttpServlet {
         templateEngine.process("signup", context, resp.getWriter());
     }
 
-    //TODO мб  упростить через вынос кук в Basic класс
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         UserRequestDto userRequestDto = UserRequestDto.builder()
@@ -44,9 +44,7 @@ public class SignUpServlet extends HttpServlet {
 
         Session session = authenticationService.saveSession(user);
 
-        Cookie cookie = new Cookie("sessionId", session.getId().toString());
-        cookie.setMaxAge(60 * 60 * 24);
-        resp.addCookie(cookie);
+        addCookie(resp, session);
 
         resp.sendRedirect("/home");
     }

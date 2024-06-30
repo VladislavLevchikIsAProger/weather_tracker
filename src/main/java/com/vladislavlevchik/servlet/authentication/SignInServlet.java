@@ -4,6 +4,7 @@ import com.vladislavlevchik.dto.UserRequestDto;
 import com.vladislavlevchik.entity.Session;
 import com.vladislavlevchik.entity.User;
 import com.vladislavlevchik.service.AuthenticationService;
+import com.vladislavlevchik.servlet.WeatherTrackerBaseServlet;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
@@ -17,7 +18,7 @@ import org.thymeleaf.web.servlet.JakartaServletWebApplication;
 import java.io.IOException;
 
 @WebServlet("/sign-in")
-public class SignInServlet extends HttpServlet {
+public class SignInServlet extends WeatherTrackerBaseServlet {
 
     private final AuthenticationService authenticationService = new AuthenticationService();
 
@@ -43,9 +44,7 @@ public class SignInServlet extends HttpServlet {
 
         Session session = authenticationService.saveSession(user);
 
-        Cookie cookie = new Cookie("sessionId", session.getId().toString());
-        cookie.setMaxAge(60 * 60 * 24);
-        resp.addCookie(cookie);
+        addCookie(resp, session);
 
         resp.sendRedirect("/home");
     }
