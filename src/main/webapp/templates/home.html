@@ -9,6 +9,18 @@
     <form action="/logout" method="post">
         <button type="submit">Logout</button>
     </form>
+
+    <h3>City Input Form</h3>
+    <form action="#" th:action="@{/locations}" method="get">
+        <div>
+            <label for="city_name">City:</label>
+            <input type="text" id="city_name" name="city_name" />
+        </div>
+        <div>
+            <button type="submit">Submit</button>
+        </div>
+    </form>
+
 </div>
 <div th:if="${login == null}">
     <form action="/sign-in" method="get">

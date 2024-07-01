@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Locations</title>
+</head>
+<body>
+
+<div th:if="${login != null}">
+    <p>Welcome, <span th:text="${login}">User</span>!</p>
+    <form action="/logout" method="post">
+        <button type="submit">Logout</button>
+    </form>
+
+    <h2>Weather Information for ${city_name}</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Latitude</th>
+            <th>Longitude</th>
+            <th>Country</th>
+            <th>State</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="weather : ${weathers}">
+            <td th:text="${weather.name}">Name</td>
+            <td th:text="${weather.lat}">Latitude</td>
+            <td th:text="${weather.lon}">Longitude</td>
+            <td th:text="${weather.country}">Country</td>
+            <td th:text="${weather.state}">State</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div th:if="${login == null}">
+    <form action="/sign-in" method="get">
+        <button type="submit">Login</button>
+    </form>
+</div>
+</body>
+</html>
