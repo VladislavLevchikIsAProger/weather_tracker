@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
     <title>Locations</title>
 </head>
 <body>
@@ -11,7 +12,7 @@
         <button type="submit">Logout</button>
     </form>
 
-    <h2>Weather Information for ${city_name}</h2>
+    <h2>Weather Information for <span th:text="${city_name}">city</span></h2>
     <table>
         <thead>
         <tr>
@@ -28,7 +29,6 @@
             <td th:text="${weather.lat}">Latitude</td>
             <td th:text="${weather.lon}">Longitude</td>
             <td th:text="${weather.country}">Country</td>
-            <td th:text="${weather.state}">State</td>
         </tr>
         </tbody>
     </table>
