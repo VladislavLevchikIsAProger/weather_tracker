@@ -1,7 +1,7 @@
 package com.vladislavlevchik.servlet;
 
 import com.vladislavlevchik.dto.LocationRequestDto;
-import com.vladislavlevchik.dto.WeatherApiResponseDirectDto;
+import com.vladislavlevchik.dto.api.WeatherApiResponseDirectDto;
 import com.vladislavlevchik.entity.Session;
 import com.vladislavlevchik.service.AuthenticationService;
 import com.vladislavlevchik.service.LocationService;

@@ -2,8 +2,8 @@ package com.vladislavlevchik.service;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.vladislavlevchik.dto.WeatherApiResponseDirectDto;
-import com.vladislavlevchik.dto.WeatherApiResponseWeatherDto;
+import com.vladislavlevchik.dto.api.WeatherApiResponseDirectDto;
+import com.vladislavlevchik.dto.api.WeatherApiResponseWeatherDto;
 import com.vladislavlevchik.dto.WeatherResponseDto;
 import com.vladislavlevchik.entity.Location;
 import jakarta.servlet.ServletException;
