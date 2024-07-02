@@ -10,7 +10,7 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class WeatherApiResponseDto {
+public class WeatherApiResponseDirectDto {
 
     @JsonProperty("name")
     private String name;

@@ -3,6 +3,9 @@ package com.vladislavlevchik.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static jakarta.persistence.GenerationType.IDENTITY;
 
 @Getter
@@ -23,4 +26,7 @@ public class User {
 
     @Column(name = "password", nullable = false)
     private String password;
+
+    @OneToMany(mappedBy = "user", orphanRemoval = true)
+    private List<Location> locations = new ArrayList<>();
 }

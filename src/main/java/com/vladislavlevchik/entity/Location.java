@@ -11,7 +11,8 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "locations")
+@Table(name = "locations",
+        uniqueConstraints = @UniqueConstraint(columnNames = {"user_id", "latitude", "longitude"}))
 public class Location {
 
     @Id
@@ -21,4 +22,13 @@ public class Location {
     @Column(name = "name")
     String name;
 
+    @Column(name = "latitude")
+    private Double lat;
+
+    @Column(name = "longitude")
+    private Double lon;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 }

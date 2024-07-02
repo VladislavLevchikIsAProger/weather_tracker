@@ -17,18 +17,21 @@
         <thead>
         <tr>
             <th>Name</th>
-            <th>Latitude</th>
-            <th>Longitude</th>
             <th>Country</th>
-            <th>State</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="weather : ${weathers}">
             <td th:text="${weather.name}">Name</td>
-            <td th:text="${weather.lat}">Latitude</td>
-            <td th:text="${weather.lon}">Longitude</td>
             <td th:text="${weather.country}">Country</td>
+            <td>
+                <form action="/locations" method="post">
+                    <input type="hidden" name="lat" th:value="${weather.lat}">
+                    <input type="hidden" name="lon" th:value="${weather.lon}">
+                    <input type="hidden" name="name" th:value="${weather.name}">
+                    <button type="submit">Add to favorites</button>
+                </form>
+            </td>
         </tr>
         </tbody>
     </table>

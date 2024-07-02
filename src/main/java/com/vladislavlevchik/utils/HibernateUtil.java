@@ -1,5 +1,6 @@
 package com.vladislavlevchik.utils;
 
+import com.vladislavlevchik.entity.Location;
 import com.vladislavlevchik.entity.Session;
 import com.vladislavlevchik.entity.User;
 import lombok.Getter;
@@ -25,6 +26,7 @@ public class HibernateUtil {
 
         configuration.addAnnotatedClass(User.class);
         configuration.addAnnotatedClass(Session.class);
+        configuration.addAnnotatedClass(Location.class);
 
         return configuration;
     }

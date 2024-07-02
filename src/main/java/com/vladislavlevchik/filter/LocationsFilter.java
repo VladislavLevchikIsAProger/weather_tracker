@@ -1,6 +1,7 @@
 package com.vladislavlevchik.filter;
 
 import com.vladislavlevchik.exception.AuthorizationException;
+import com.vladislavlevchik.exception.DuplicateLocationException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebFilter;
@@ -29,6 +30,8 @@ public class LocationsFilter extends HttpFilter {
             super.doFilter(req, res, chain);
         } catch (AuthorizationException e) {
             templateEngine.process("home", context, res.getWriter());
+        } catch (DuplicateLocationException e){
+            res.sendRedirect("home");
         }
     }
 }

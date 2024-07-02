@@ -1,8 +1,13 @@
 package com.vladislavlevchik.servlet;
 
-import com.vladislavlevchik.dto.WeatherApiResponseDto;
+import com.vladislavlevchik.dto.WeatherApiResponseDirectDto;
+import com.vladislavlevchik.entity.Location;
 import com.vladislavlevchik.entity.Session;
+import com.vladislavlevchik.entity.User;
+import com.vladislavlevchik.repository.LocationRepository;
+import com.vladislavlevchik.repository.UserRepository;
 import com.vladislavlevchik.service.AuthenticationService;
+import com.vladislavlevchik.service.LocationService;
 import com.vladislavlevchik.service.WeatherApiService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -22,6 +27,8 @@ public class LocationsServlet extends HttpServlet {
     private final WeatherApiService weatherApiService = new WeatherApiService();
     private final AuthenticationService authenticationService = new AuthenticationService();
 
+    private final LocationService locationService = new LocationService();
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         TemplateEngine templateEngine = (TemplateEngine) getServletContext().getAttribute("templateEngine");
@@ -36,12 +43,27 @@ public class LocationsServlet extends HttpServlet {
 
         String cityName = req.getParameter("city_name");
 
-        List<WeatherApiResponseDto> list = weatherApiService.getList(cityName);
+        List<WeatherApiResponseDirectDto> list = weatherApiService.getList(cityName);
 
         context.setVariable("weathers", list);
         context.setVariable("login", session.getUser().getLogin());
         context.setVariable("city_name", cityName);
 
         templateEngine.process("locations", context, resp.getWriter());
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Double lat = Double.valueOf(req.getParameter("lat"));
+        Double lon = Double.valueOf(req.getParameter("lon"));
+        String name = req.getParameter("name");
+
+        String sessionId = authenticationService.findSessionIdCookie(req.getCookies()).getValue();
+
+        Session session = authenticationService.getSessionIfValid(sessionId);
+
+        locationService.addLocation(session.getUser(), name, lat, lon);
+
+        resp.sendRedirect("home");
     }
 }
