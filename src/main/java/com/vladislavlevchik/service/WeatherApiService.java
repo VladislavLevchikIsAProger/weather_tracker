@@ -3,6 +3,9 @@ package com.vladislavlevchik.service;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vladislavlevchik.dto.WeatherApiResponseDirectDto;
+import com.vladislavlevchik.dto.WeatherApiResponseWeatherDto;
+import com.vladislavlevchik.dto.WeatherResponseDto;
+import com.vladislavlevchik.entity.Location;
 import jakarta.servlet.ServletException;
 
 import java.io.IOException;
@@ -12,59 +15,65 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.List;
 
+import static com.vladislavlevchik.utils.MapperUtil.convertToDto;
+
 public class WeatherApiService {
 
-    private static final String API_KEY = "82a165d34bb59b30c17b7dbc1ea9a409";
-    private static final int LIMIT = 5;
+    private static final String API_ID = "82a165d34bb59b30c17b7dbc1ea9a409";
+    private static final String BASE_API_URL = "https://api.openweathermap.org";
+    private static final String WEATHER_PATH = "/data/2.5/weather";
+    private static final String DIRECT_PATH = "/geo/1.0/direct";
 
-    //TODO название и упростить
-    public List<WeatherApiResponseDirectDto> getList(String city) throws ServletException, IOException {
-        // Формирование URL для запроса
-        String urlString = String.format("http://api.openweathermap.org/geo/1.0/direct?q=%s&limit=%d&appid=%s", city, LIMIT, API_KEY);
 
-        // Выполнение HTTP-запроса с использованием HttpClient
-        HttpClient client = HttpClient.newHttpClient();
-        HttpRequest req = HttpRequest.newBuilder()
-                .uri(URI.create(urlString))
-                .build();
-        HttpResponse<String> res;
+    private static final HttpClient client = HttpClient.newHttpClient();
+    private static final ObjectMapper objectMapper = new ObjectMapper();
+
+    public List<WeatherApiResponseDirectDto> getGeoLocationInfo(String city) throws ServletException, IOException {
         try {
-            res = client.send(req, HttpResponse.BodyHandlers.ofString());
+            URI uri = buildURI(city);
+
+            HttpRequest request = buildRequest(uri);
+
+            HttpResponse<String> res = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+            return objectMapper.readValue(
+                    res.body(),
+                    new TypeReference<List<WeatherApiResponseDirectDto>>() {});
+
+        } catch (InterruptedException e) {
+            throw new ServletException("Error during API call", e);
+        }
+    }
+
+    //TODO название
+    public WeatherResponseDto getWeatherInfo(Location location) throws ServletException, IOException {
+        try {
+            URI uri = buildURI(location);
+
+            HttpRequest req = buildRequest(uri);
+
+            HttpResponse<String> res = client.send(req, HttpResponse.BodyHandlers.ofString());
+
+            WeatherApiResponseWeatherDto weatherApiResponseWeatherDto = objectMapper.readValue(res.body(), WeatherApiResponseWeatherDto.class);
+
+            return convertToDto(weatherApiResponseWeatherDto);
         } catch (InterruptedException e) {
             throw new ServletException("Error during API call", e);
         }
 
-        // Разбор JSON с использованием Jackson и десериализация в List<WeatherApiResponseDto>
-        ObjectMapper objectMapper = new ObjectMapper();
-        List<WeatherApiResponseDirectDto> weatherApiResponseDirectDtoList = objectMapper.readValue(res.body(), new TypeReference<List<WeatherApiResponseDirectDto>>() {
-        });
-
-        return weatherApiResponseDirectDtoList;
     }
 
-    //TODO название и упростить
-    public List<WeatherApiResponseDirectDto> get(String lat, String lon) throws ServletException, IOException {
-        // Формирование URL для запроса
-        String urlString = String.format("http://api.openweathermap.org/data/2.5/weather?lat=%s&lon=%s&appid=%s", lat, lon, API_KEY);
-
-        // Выполнение HTTP-запроса с использованием HttpClient
-        HttpClient client = HttpClient.newHttpClient();
-        HttpRequest req = HttpRequest.newBuilder()
-                .uri(URI.create(urlString))
+    private HttpRequest buildRequest(URI uri) {
+        return HttpRequest.newBuilder()
+                .uri(uri)
                 .build();
-        HttpResponse<String> res;
-        try {
-            res = client.send(req, HttpResponse.BodyHandlers.ofString());
-        } catch (InterruptedException e) {
-            throw new ServletException("Error during API call", e);
-        }
-
-        // Разбор JSON с использованием Jackson и десериализация в List<WeatherApiResponseDto>
-        ObjectMapper objectMapper = new ObjectMapper();
-        List<WeatherApiResponseDirectDto> weatherApiResponseDirectDtoList = objectMapper.readValue(res.body(), new TypeReference<List<WeatherApiResponseDirectDto>>() {
-        });
-
-        return weatherApiResponseDirectDtoList;
     }
 
+    private URI buildURI(String city) {
+        return URI.create(String.format(BASE_API_URL + DIRECT_PATH + "?q=%s&limit=5&appid=%S", city, API_ID));
+    }
+
+    private URI buildURI(Location location) {
+        return URI.create(String.format(BASE_API_URL + WEATHER_PATH + "?lat=%s&lon=%s&appid=%s", location.getLat(), location.getLon(), API_ID));
+    }
 }
