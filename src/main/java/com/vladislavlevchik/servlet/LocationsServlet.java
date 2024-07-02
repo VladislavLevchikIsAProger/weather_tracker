@@ -1,11 +1,8 @@
 package com.vladislavlevchik.servlet;
 
+import com.vladislavlevchik.dto.LocationRequestDto;
 import com.vladislavlevchik.dto.WeatherApiResponseDirectDto;
-import com.vladislavlevchik.entity.Location;
 import com.vladislavlevchik.entity.Session;
-import com.vladislavlevchik.entity.User;
-import com.vladislavlevchik.repository.LocationRepository;
-import com.vladislavlevchik.repository.UserRepository;
 import com.vladislavlevchik.service.AuthenticationService;
 import com.vladislavlevchik.service.LocationService;
 import com.vladislavlevchik.service.WeatherApiService;
@@ -22,11 +19,12 @@ import org.thymeleaf.web.servlet.JakartaServletWebApplication;
 import java.io.IOException;
 import java.util.List;
 
+import static java.lang.Double.parseDouble;
+
 @WebServlet("/locations")
 public class LocationsServlet extends HttpServlet {
     private final WeatherApiService weatherApiService = new WeatherApiService();
     private final AuthenticationService authenticationService = new AuthenticationService();
-
     private final LocationService locationService = new LocationService();
 
     @Override
@@ -43,7 +41,7 @@ public class LocationsServlet extends HttpServlet {
 
         String cityName = req.getParameter("city_name");
 
-        List<WeatherApiResponseDirectDto> list = weatherApiService.getList(cityName);
+        List<WeatherApiResponseDirectDto> list = weatherApiService.getGeoLocationInfo(cityName);
 
         context.setVariable("weathers", list);
         context.setVariable("login", session.getUser().getLogin());
@@ -53,16 +51,18 @@ public class LocationsServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Double lat = Double.valueOf(req.getParameter("lat"));
-        Double lon = Double.valueOf(req.getParameter("lon"));
-        String name = req.getParameter("name");
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        LocationRequestDto locationRequestDto = LocationRequestDto.builder()
+                .name(req.getParameter("name"))
+                .lat(parseDouble(req.getParameter("lat")))
+                .lon(parseDouble(req.getParameter("lon")))
+                .build();
 
         String sessionId = authenticationService.findSessionIdCookie(req.getCookies()).getValue();
 
         Session session = authenticationService.getSessionIfValid(sessionId);
 
-        locationService.addLocation(session.getUser(), name, lat, lon);
+        locationService.addLocationToUser(session.getUser(), locationRequestDto);
 
         resp.sendRedirect("home");
     }
