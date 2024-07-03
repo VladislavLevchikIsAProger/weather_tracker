@@ -9,6 +9,10 @@ import lombok.*;
 @Builder
 public class WeatherResponseDto {
 
+    private String city;
+
+    private String country;
+
     private int temp;
 
     private int feelsLike;
