@@ -5,11 +5,14 @@ import com.vladislavlevchik.entity.Session;
 import com.vladislavlevchik.entity.User;
 import com.vladislavlevchik.service.AuthenticationService;
 import com.vladislavlevchik.servlet.WeatherTrackerBaseServlet;
+import com.vladislavlevchik.utils.ValidationUtil;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+
+import static com.vladislavlevchik.utils.ValidationUtil.validate;
 
 
 @WebServlet("/sign-up")
@@ -26,6 +29,8 @@ public class SignUpServlet extends WeatherTrackerBaseServlet {
                 .login(req.getParameter("login"))
                 .password(req.getParameter("password"))
                 .build();
+
+        validate(userRequestDto);
 
         User user = authenticationService.saveUser(userRequestDto);
 
