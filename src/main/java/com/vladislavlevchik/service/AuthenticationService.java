@@ -3,7 +3,7 @@ package com.vladislavlevchik.service;
 import com.vladislavlevchik.dto.UserRequestDto;
 import com.vladislavlevchik.entity.Session;
 import com.vladislavlevchik.entity.User;
-import com.vladislavlevchik.exception.*;
+import com.vladislavlevchik.exception.authentication.*;
 import com.vladislavlevchik.repository.SessionRepository;
 import com.vladislavlevchik.repository.UserRepository;
 import jakarta.servlet.http.Cookie;

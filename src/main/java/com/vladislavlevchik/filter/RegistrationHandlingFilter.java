@@ -1,10 +1,8 @@
 package com.vladislavlevchik.filter;
 
-import com.vladislavlevchik.exception.IncorrectPasswordException;
-import com.vladislavlevchik.exception.InvalidLoginException;
-import com.vladislavlevchik.exception.InvalidPasswordException;
-import com.vladislavlevchik.exception.UserAlreadyExistException;
-import com.vladislavlevchik.utils.WebContextUtil;
+import com.vladislavlevchik.exception.authentication.InvalidLoginException;
+import com.vladislavlevchik.exception.authentication.InvalidPasswordException;
+import com.vladislavlevchik.exception.authentication.UserAlreadyExistException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebFilter;
@@ -13,8 +11,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
-import org.thymeleaf.web.IWebExchange;
-import org.thymeleaf.web.servlet.JakartaServletWebApplication;
 
 import java.io.IOException;
 

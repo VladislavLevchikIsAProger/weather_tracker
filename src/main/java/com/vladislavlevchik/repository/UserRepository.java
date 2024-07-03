@@ -1,7 +1,7 @@
 package com.vladislavlevchik.repository;
 
 import com.vladislavlevchik.entity.User;
-import com.vladislavlevchik.exception.UserAlreadyExistException;
+import com.vladislavlevchik.exception.authentication.UserAlreadyExistException;
 import org.hibernate.Session;
 import org.hibernate.exception.ConstraintViolationException;
 

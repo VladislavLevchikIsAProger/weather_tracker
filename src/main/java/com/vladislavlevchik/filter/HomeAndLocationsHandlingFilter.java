@@ -1,6 +1,6 @@
 package com.vladislavlevchik.filter;
 
-import com.vladislavlevchik.exception.AuthorizationException;
+import com.vladislavlevchik.exception.authentication.AuthorizationException;
 import com.vladislavlevchik.exception.DuplicateLocationException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

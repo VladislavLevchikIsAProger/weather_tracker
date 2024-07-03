@@ -1,8 +1,8 @@
 package com.vladislavlevchik.utils;
 
 import com.vladislavlevchik.dto.UserRequestDto;
-import com.vladislavlevchik.exception.InvalidLoginException;
-import com.vladislavlevchik.exception.InvalidPasswordException;
+import com.vladislavlevchik.exception.authentication.InvalidLoginException;
+import com.vladislavlevchik.exception.authentication.InvalidPasswordException;
 import lombok.experimental.UtilityClass;
 
 @UtilityClass

@@ -1,8 +1,7 @@
 package com.vladislavlevchik.filter;
 
-import com.vladislavlevchik.exception.IncorrectPasswordException;
-import com.vladislavlevchik.exception.UserAlreadyExistException;
-import com.vladislavlevchik.exception.UserNotFoundByLoginException;
+import com.vladislavlevchik.exception.authentication.IncorrectPasswordException;
+import com.vladislavlevchik.exception.authentication.UserNotFoundByLoginException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebFilter;

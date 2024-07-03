@@ -1,6 +1,6 @@
 package com.vladislavlevchik.filter;
 
-import com.vladislavlevchik.exception.CookieNotFoundException;
+import com.vladislavlevchik.exception.authentication.CookieNotFoundException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebFilter;
