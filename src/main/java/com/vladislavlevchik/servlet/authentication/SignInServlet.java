@@ -18,16 +18,8 @@ import java.io.IOException;
 @WebServlet("/sign-in")
 public class SignInServlet extends WeatherTrackerBaseServlet {
 
-    private final AuthenticationService authenticationService = new AuthenticationService();
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        TemplateEngine templateEngine = (TemplateEngine) getServletContext().getAttribute("templateEngine");
-        IWebExchange webExchange = JakartaServletWebApplication.buildApplication(getServletContext())
-                .buildExchange(req, resp);
-
-        WebContext context = new WebContext(webExchange);
-
         templateEngine.process("signin", context, resp.getWriter());
     }
 

@@ -11,7 +11,6 @@ import java.io.IOException;
 
 @WebServlet("/logout")
 public class SignOutServlet extends WeatherTrackerBaseServlet {
-    private final AuthenticationService authenticationService = new AuthenticationService();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {

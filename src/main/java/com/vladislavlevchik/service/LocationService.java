@@ -27,7 +27,7 @@ public class LocationService {
         locationRepository.save(location);
     }
 
-    public List<WeatherResponseDto> getWeathers(List<Location> locations) throws ServletException, IOException {
+    public List<WeatherResponseDto> getWeathers(List<Location> locations) throws IOException {
         List<WeatherResponseDto> list = new ArrayList<>();
 
         for(Location location: locations){

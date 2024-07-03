@@ -22,19 +22,9 @@ import java.util.List;
 import static java.lang.Double.parseDouble;
 
 @WebServlet("/locations")
-public class LocationsServlet extends HttpServlet {
-    private final WeatherApiService weatherApiService = new WeatherApiService();
-    private final AuthenticationService authenticationService = new AuthenticationService();
-    private final LocationService locationService = new LocationService();
-
+public class LocationsServlet extends WeatherTrackerBaseServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        TemplateEngine templateEngine = (TemplateEngine) getServletContext().getAttribute("templateEngine");
-        IWebExchange webExchange = JakartaServletWebApplication.buildApplication(getServletContext())
-                .buildExchange(req, resp);
-
-        WebContext context = new WebContext(webExchange);
-
         String sessionId = authenticationService.findSessionIdCookie(req.getCookies()).getValue();
 
         Session session = authenticationService.getSessionIfValid(sessionId);
