@@ -6,6 +6,8 @@ import com.vladislavlevchik.dto.api.WeatherApiResponseDirectDto;
 import com.vladislavlevchik.dto.api.WeatherApiResponseWeatherDto;
 import com.vladislavlevchik.dto.WeatherResponseDto;
 import com.vladislavlevchik.entity.Location;
+import com.vladislavlevchik.exception.api.GeoLocationException;
+import com.vladislavlevchik.exception.api.WeatherInfoException;
 import jakarta.servlet.ServletException;
 
 import java.io.IOException;
@@ -41,12 +43,11 @@ public class WeatherApiService {
                     new TypeReference<List<WeatherApiResponseDirectDto>>() {});
 
         } catch (InterruptedException e) {
-            throw new ServletException("Error during API call", e);
+            throw new GeoLocationException();
         }
     }
 
-    //TODO название
-    public WeatherResponseDto getWeatherInfo(Location location) throws ServletException, IOException {
+    public WeatherResponseDto getWeatherInfo(Location location) throws IOException {
         try {
             URI uri = buildURI(location);
 
@@ -58,7 +59,7 @@ public class WeatherApiService {
 
             return convertToDto(weatherApiResponseWeatherDto);
         } catch (InterruptedException e) {
-            throw new ServletException("Error during API call", e);
+            throw new WeatherInfoException();
         }
 
     }
