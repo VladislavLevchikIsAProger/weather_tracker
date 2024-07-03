@@ -4,7 +4,7 @@ import com.vladislavlevchik.entity.Session;
 import com.vladislavlevchik.service.AuthenticationService;
 import com.vladislavlevchik.service.LocationService;
 import com.vladislavlevchik.service.WeatherApiService;
-import jakarta.servlet.ServletConfig;
+import com.vladislavlevchik.utils.WebContextUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
@@ -12,8 +12,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
-import org.thymeleaf.web.IWebExchange;
-import org.thymeleaf.web.servlet.JakartaServletWebApplication;
 
 import java.io.IOException;
 
@@ -33,10 +31,7 @@ public abstract class WeatherTrackerBaseServlet extends HttpServlet {
 
     @Override
     public void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        IWebExchange webExchange = JakartaServletWebApplication.buildApplication(getServletContext())
-                .buildExchange(req, resp);
-
-        context = new WebContext(webExchange);
+        context = WebContextUtil.buildWebContext(req, resp, getServletContext());
 
         super.service(req, resp);
     }
