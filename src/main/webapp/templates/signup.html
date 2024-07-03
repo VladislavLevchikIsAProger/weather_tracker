@@ -11,8 +11,14 @@
     <div th:if="${param.error}" style="color: red;">
         Login is already in use
     </div>
+    <div th:if="${errorLogin}" style="color: red;">
+        Login must contain only English letters
+    </div>
     <label for="login">Username:</label>
     <input type="text" id="login" name="login" required><br>
+    <div th:if="${errorPassword}" style="color: red;">
+        Password must be in English and contain at least one digit
+    </div>
     <label for="password">Password:</label>
     <input type="password" id="password" name="password" required><br>
     <input type="submit" value="Вход">
