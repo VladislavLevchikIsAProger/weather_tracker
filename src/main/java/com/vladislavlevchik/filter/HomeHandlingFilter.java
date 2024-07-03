@@ -14,6 +14,8 @@ import org.thymeleaf.web.servlet.JakartaServletWebApplication;
 
 import java.io.IOException;
 
+import static com.vladislavlevchik.utils.WebContextUtil.buildWebContext;
+
 @WebFilter("/home")
 public class HomeHandlingFilter extends HttpFilter {
 
@@ -21,10 +23,7 @@ public class HomeHandlingFilter extends HttpFilter {
     protected void doFilter(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws IOException, ServletException {
         TemplateEngine templateEngine = (TemplateEngine) getServletContext().getAttribute("templateEngine");
 
-        IWebExchange webExchange = JakartaServletWebApplication.buildApplication(getServletContext())
-                .buildExchange(req, res);
-
-        WebContext context = new WebContext(webExchange);
+        WebContext context = buildWebContext(req, res, getServletContext());
 
         try {
             super.doFilter(req, res, chain);
