@@ -3,15 +3,10 @@ package com.vladislavlevchik.servlet.authentication;
 import com.vladislavlevchik.dto.UserRequestDto;
 import com.vladislavlevchik.entity.Session;
 import com.vladislavlevchik.entity.User;
-import com.vladislavlevchik.service.AuthenticationService;
 import com.vladislavlevchik.servlet.WeatherTrackerBaseServlet;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.thymeleaf.TemplateEngine;
-import org.thymeleaf.context.WebContext;
-import org.thymeleaf.web.IWebExchange;
-import org.thymeleaf.web.servlet.JakartaServletWebApplication;
 
 import java.io.IOException;
 

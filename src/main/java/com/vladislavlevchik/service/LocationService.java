@@ -5,7 +5,6 @@ import com.vladislavlevchik.dto.WeatherResponseDto;
 import com.vladislavlevchik.entity.Location;
 import com.vladislavlevchik.entity.User;
 import com.vladislavlevchik.repository.LocationRepository;
-import jakarta.servlet.ServletException;
 
 import java.io.IOException;
 import java.util.ArrayList;

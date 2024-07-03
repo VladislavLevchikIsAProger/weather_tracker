@@ -2,8 +2,6 @@ package com.vladislavlevchik.servlet;
 
 import com.vladislavlevchik.dto.WeatherResponseDto;
 import com.vladislavlevchik.entity.Session;
-import com.vladislavlevchik.service.AuthenticationService;
-import com.vladislavlevchik.service.LocationService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServletRequest;

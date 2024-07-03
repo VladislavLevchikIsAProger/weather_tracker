@@ -3,18 +3,10 @@ package com.vladislavlevchik.servlet;
 import com.vladislavlevchik.dto.LocationRequestDto;
 import com.vladislavlevchik.dto.api.WeatherApiResponseDirectDto;
 import com.vladislavlevchik.entity.Session;
-import com.vladislavlevchik.service.AuthenticationService;
-import com.vladislavlevchik.service.LocationService;
-import com.vladislavlevchik.service.WeatherApiService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.thymeleaf.TemplateEngine;
-import org.thymeleaf.context.WebContext;
-import org.thymeleaf.web.IWebExchange;
-import org.thymeleaf.web.servlet.JakartaServletWebApplication;
 
 import java.io.IOException;
 import java.util.List;

@@ -1,6 +1,5 @@
 package com.vladislavlevchik.servlet.authentication;
 
-import com.vladislavlevchik.service.AuthenticationService;
 import com.vladislavlevchik.servlet.WeatherTrackerBaseServlet;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.Cookie;
