@@ -17,8 +17,6 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.List;
 
-import static com.vladislavlevchik.utils.MapperUtil.convertToDto;
-
 public class WeatherApiService {
 
     private static final String API_ID = "82a165d34bb59b30c17b7dbc1ea9a409";
@@ -40,7 +38,8 @@ public class WeatherApiService {
 
             return objectMapper.readValue(
                     res.body(),
-                    new TypeReference<List<WeatherApiResponseDirectDto>>() {});
+                    new TypeReference<List<WeatherApiResponseDirectDto>>() {
+                    });
 
         } catch (InterruptedException e) {
             throw new GeoLocationException();
@@ -57,7 +56,7 @@ public class WeatherApiService {
 
             WeatherApiResponseWeatherDto weatherApiResponseWeatherDto = objectMapper.readValue(res.body(), WeatherApiResponseWeatherDto.class);
 
-            return convertToDto(weatherApiResponseWeatherDto);
+            return buildWeatherResponseDto(weatherApiResponseWeatherDto, location);
         } catch (InterruptedException e) {
             throw new WeatherInfoException();
         }
@@ -76,5 +75,18 @@ public class WeatherApiService {
 
     private URI buildURI(Location location) {
         return URI.create(String.format(BASE_API_URL + WEATHER_PATH + "?lat=%s&lon=%s&appid=%s", location.getLat(), location.getLon(), API_ID));
+    }
+
+    private WeatherResponseDto buildWeatherResponseDto(WeatherApiResponseWeatherDto weatherApiResponseWeatherDto, Location location) {
+        return WeatherResponseDto.builder()
+                .city(location.getName())
+                .country(weatherApiResponseWeatherDto.getSys().getCountry())
+                .temp((int) Math.round(weatherApiResponseWeatherDto.getMain().getTemp() - 273.15))
+                .feelsLike((int) Math.round(weatherApiResponseWeatherDto.getMain().getFeelsLike() - 273.15))
+                .description(weatherApiResponseWeatherDto.getWeather()[0].getDescription())
+                .humidity(weatherApiResponseWeatherDto.getMain().getHumidity())
+                .pressure(weatherApiResponseWeatherDto.getMain().getPressure())
+                .speed(weatherApiResponseWeatherDto.getWind().getSpeed())
+                .build();
     }
 }
