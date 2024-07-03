@@ -17,6 +17,9 @@ public class WeatherApiResponseWeatherDto {
     @JsonProperty("wind")
     private WindDto wind;
 
+    @JsonProperty("sys")
+    private SysDto sys;
+
     @Data
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class WeatherMainDto {
@@ -37,5 +40,11 @@ public class WeatherApiResponseWeatherDto {
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class WindDto {
         private int speed;
+    }
+
+    @Data
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public static class SysDto {
+        private String country;
     }
 }
