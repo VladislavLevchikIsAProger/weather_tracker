@@ -9,7 +9,7 @@
 
 <form th:action="@{/sign-in}" method="post">
     <div th:if="${param.error}" style="color: red;">
-        Invalid login or password. Please try again.
+        Incorrect login or password. Please try again.
     </div>
     <label for="login">Username:</label>
     <input type="text" id="login" name="login" required><br>

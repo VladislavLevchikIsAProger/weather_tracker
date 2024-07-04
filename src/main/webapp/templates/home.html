@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
     <title>Home</title>
 </head>
 <body>
@@ -14,12 +15,32 @@
     <form action="#" th:action="@{/locations}" method="get">
         <div>
             <label for="city_name">City:</label>
-            <input type="text" id="city_name" name="city_name" />
+            <input type="text" id="city_name" name="city_name"/>
         </div>
         <div>
             <button type="submit">Submit</button>
         </div>
     </form>
+
+    <h3>Weather Information</h3>
+    <div th:each="weather : ${weathers}">
+        <p>
+            <strong>City:</strong> <span th:text="${weather.city}"></span><br>
+            <strong>Country:</strong> <span th:text="${weather.country}"></span><br>
+            <strong>Temperature:</strong> <span th:text="${weather.temp}"></span>°C<br>
+            <strong>Feels Like:</strong> <span th:text="${weather.feelsLike}"></span>°C<br>
+            <strong>Description:</strong> <span th:text="${weather.description}"></span><br>
+            <strong>Humidity:</strong> <span th:text="${weather.humidity}"></span>%<br>
+            <strong>Pressure:</strong> <span th:text="${weather.pressure}"></span> hPa<br>
+            <strong>Wind Speed:</strong> <span th:text="${weather.speed}"></span> m/s<br>
+        <form action="/home" method="post">
+            <input type="hidden" name="lat" th:value="${weather.lat}">
+            <input type="hidden" name="lon" th:value="${weather.lon}">
+            <button type="submit">Remove from Favorites</button>
+        </form>
+        </p>
+        <hr>
+    </div>
 
 </div>
 <div th:if="${login == null}">

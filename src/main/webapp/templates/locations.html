@@ -6,7 +6,7 @@
 </head>
 <body>
 
-<div th:if="${login != null}">
+<!--<div th:if="${login != null}">-->
     <p>Welcome, <span th:text="${login}">User</span>!</p>
     <form action="/logout" method="post">
         <button type="submit">Logout</button>
@@ -35,12 +35,12 @@
         </tr>
         </tbody>
     </table>
-</div>
+<!--</div>-->
 
-<div th:if="${login == null}">
-    <form action="/sign-in" method="get">
-        <button type="submit">Login</button>
-    </form>
-</div>
+<!--<div th:if="${login == null}">-->
+<!--    <form action="/sign-in" method="get">-->
+<!--        <button type="submit">Login</button>-->
+<!--    </form>-->
+<!--</div>-->
 </body>
 </html>
