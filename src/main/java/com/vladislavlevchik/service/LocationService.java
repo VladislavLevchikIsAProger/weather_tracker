@@ -1,5 +1,6 @@
 package com.vladislavlevchik.service;
 
+import com.vladislavlevchik.dto.CoordinatesRequestDto;
 import com.vladislavlevchik.dto.LocationRequestDto;
 import com.vladislavlevchik.dto.WeatherResponseDto;
 import com.vladislavlevchik.entity.Location;
@@ -29,11 +30,21 @@ public class LocationService {
     public List<WeatherResponseDto> getWeathers(List<Location> locations) throws IOException {
         List<WeatherResponseDto> list = new ArrayList<>();
 
-        for(Location location: locations){
+        for (Location location : locations) {
             list.add(weatherApiService.getWeatherInfo(location));
         }
 
         return list;
+    }
+
+    public void deleteLocationFromUser(CoordinatesRequestDto coordinates, User user) {
+        Location location = Location.builder()
+                .lat(coordinates.getLat())
+                .lon(coordinates.getLon())
+                .user(user)
+                .build();
+
+        locationRepository.delete(location);
     }
 
 }
