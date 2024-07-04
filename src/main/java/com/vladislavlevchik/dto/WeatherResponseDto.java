@@ -25,4 +25,8 @@ public class WeatherResponseDto {
 
     private int speed;
 
+    private double lat;
+
+    private double lon;
+
 }
