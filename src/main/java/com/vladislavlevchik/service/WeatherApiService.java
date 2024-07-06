@@ -69,19 +69,19 @@ public class WeatherApiService {
     }
 
     private URI buildURI(String city) {
-        return URI.create(String.format(BASE_API_URL + DIRECT_PATH + "?q=%s&limit=5&appid=%S", city, getApiKey()));
+        return URI.create(String.format(BASE_API_URL + DIRECT_PATH + "?q=%s&limit=5&appid=%s", city, getApiKey()));
     }
 
     private URI buildURI(Location location) {
-        return URI.create(String.format(BASE_API_URL + WEATHER_PATH + "?lat=%s&lon=%s&appid=%s", location.getLat(), location.getLon(), getApiKey()));
+        return URI.create(String.format(BASE_API_URL + WEATHER_PATH + "?lat=%s&lon=%s&appid=%s&units=metric", location.getLat(), location.getLon(), getApiKey()));
     }
 
     private WeatherResponseDto buildWeatherResponseDto(WeatherApiResponseWeatherDto weatherApiResponseWeatherDto, Location location) {
         return WeatherResponseDto.builder()
                 .city(location.getName())
                 .country(weatherApiResponseWeatherDto.getSys().getCountry())
-                .temp((int) Math.round(weatherApiResponseWeatherDto.getMain().getTemp() - 273.15))
-                .feelsLike((int) Math.round(weatherApiResponseWeatherDto.getMain().getFeelsLike() - 273.15))
+                .temp((int) Math.round(weatherApiResponseWeatherDto.getMain().getTemp()))
+                .feelsLike((int) Math.round(weatherApiResponseWeatherDto.getMain().getFeelsLike()))
                 .description(weatherApiResponseWeatherDto.getWeather()[0].getDescription())
                 .humidity(weatherApiResponseWeatherDto.getMain().getHumidity())
                 .pressure(weatherApiResponseWeatherDto.getMain().getPressure())
