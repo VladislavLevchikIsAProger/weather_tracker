@@ -12,6 +12,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+import static java.lang.Double.parseDouble;
+
 @WebServlet("/home")
 public class HomeServlet extends WeatherTrackerBaseServlet {
 
@@ -32,8 +34,8 @@ public class HomeServlet extends WeatherTrackerBaseServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         CoordinatesRequestDto coordinates = CoordinatesRequestDto.builder()
-                .lat(Double.parseDouble(req.getParameter("lat")))
-                .lon(Double.parseDouble(req.getParameter("lon")))
+                .lat(parseDouble(req.getParameter("lat")))
+                .lon(parseDouble(req.getParameter("lon")))
                 .build();
 
         String sessionId = authenticationService.findSessionIdCookie(req.getCookies()).getValue();
