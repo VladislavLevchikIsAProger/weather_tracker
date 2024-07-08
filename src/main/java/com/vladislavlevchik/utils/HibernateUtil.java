@@ -21,7 +21,7 @@ public class HibernateUtil {
         return configuration.buildSessionFactory();
     }
 
-    private static Configuration buildConfiguration() {
+    public static Configuration buildConfiguration() {
         Configuration configuration = new Configuration();
 
         configuration.addAnnotatedClass(User.class);
