@@ -1,12 +1,23 @@
 package com.vladislavlevchik.repository;
 
 import com.vladislavlevchik.entity.Session;
+import com.vladislavlevchik.utils.HibernateUtil;
 import jakarta.persistence.Query;
+import org.hibernate.SessionFactory;
+import org.hibernate.exception.ConstraintViolationException;
 
 import java.util.Optional;
 import java.util.UUID;
 
-public class SessionRepository extends BaseRepository{
+public class SessionRepository extends BaseRepository<Session> {
+
+    public SessionRepository(SessionFactory sessionFactory) {
+        super(sessionFactory);
+    }
+
+    public SessionRepository() {
+        super();
+    }
 
     public Optional<Session> findById(UUID id) {
         try (org.hibernate.Session session = sessionFactory.openSession()) {
@@ -14,21 +25,21 @@ public class SessionRepository extends BaseRepository{
         }
     }
 
-    public Session save(Session entity) {
-        try (org.hibernate.Session session = sessionFactory.openSession()) {
-            session.beginTransaction();
-
-            session.save(entity);
-
-            session.getTransaction().commit();
-
-            return entity;
-        }
-    }
+//    public Session save(Session entity) {
+//        try (org.hibernate.Session session = sessionFactory.openSession()) {
+//            session.beginTransaction();
+//
+//            session.save(entity);
+//
+//            session.getTransaction().commit();
+//
+//            return entity;
+//        }
+//    }
 
     public void deleteById(UUID id) {
 
-        try(org.hibernate.Session session = sessionFactory.openSession()) {
+        try (org.hibernate.Session session = sessionFactory.openSession()) {
             session.beginTransaction();
 
             String hql = "delete from Session where id = :UUID";
@@ -39,5 +50,10 @@ public class SessionRepository extends BaseRepository{
 
             session.getTransaction().commit();
         }
+    }
+
+    @Override
+    protected void handleConstraintViolationException(ConstraintViolationException e) {
+
     }
 }
