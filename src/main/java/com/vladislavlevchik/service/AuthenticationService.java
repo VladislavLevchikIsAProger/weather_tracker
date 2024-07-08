@@ -7,6 +7,7 @@ import com.vladislavlevchik.exception.authentication.*;
 import com.vladislavlevchik.repository.SessionRepository;
 import com.vladislavlevchik.repository.UserRepository;
 import jakarta.servlet.http.Cookie;
+import org.hibernate.SessionFactory;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.time.LocalDateTime;
@@ -19,9 +20,19 @@ import static org.mindrot.jbcrypt.BCrypt.hashpw;
 
 public class AuthenticationService {
 
-    private final SessionRepository sessionRepository = new SessionRepository();
+    private final SessionRepository sessionRepository;
 
-    private final UserRepository userRepository = new UserRepository();
+    private final UserRepository userRepository;
+
+    public AuthenticationService() {
+        sessionRepository = new SessionRepository();
+        userRepository = new UserRepository();
+    }
+
+    public AuthenticationService(SessionFactory sessionFactory) {
+        sessionRepository = new SessionRepository(sessionFactory);
+        userRepository = new UserRepository(sessionFactory);
+    }
 
     public User saveUser(UserRequestDto user) {
         String hashedPassword = hashpw(user.getPassword(), BCrypt.gensalt());
