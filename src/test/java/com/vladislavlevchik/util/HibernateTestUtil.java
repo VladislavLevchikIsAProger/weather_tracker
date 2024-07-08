@@ -1,0 +1,36 @@
+package com.vladislavlevchik.util;
+
+import com.vladislavlevchik.entity.Location;
+import com.vladislavlevchik.entity.Session;
+import com.vladislavlevchik.entity.User;
+import com.vladislavlevchik.utils.HibernateUtil;
+import lombok.Getter;
+import lombok.experimental.UtilityClass;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
+@UtilityClass
+public class HibernateTestUtil {
+
+    @Getter
+    private static final SessionFactory sessionFactory = buildSessionFactory();
+
+    public static SessionFactory buildSessionFactory() {
+        Configuration configuration = buildConfiguration();
+        configuration.configure();
+
+        return configuration.buildSessionFactory();
+    }
+
+    public static Configuration buildConfiguration() {
+        Configuration configuration = new Configuration();
+
+        configuration.addAnnotatedClass(User.class);
+        configuration.addAnnotatedClass(Session.class);
+        configuration.addAnnotatedClass(Location.class);
+
+        return configuration;
+    }
+
+
+}
