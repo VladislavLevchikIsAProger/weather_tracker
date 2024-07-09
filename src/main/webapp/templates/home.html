@@ -33,6 +33,8 @@
             <strong>Humidity:</strong> <span th:text="${weather.humidity}"></span>%<br>
             <strong>Pressure:</strong> <span th:text="${weather.pressure}"></span> hPa<br>
             <strong>Wind Speed:</strong> <span th:text="${weather.speed}"></span> m/s<br>
+            <strong>Lat:</strong> <span th:text="${weather.lat}"></span><br>
+            <strong>Lon:</strong> <span th:text="${weather.lon}"></span><br>
         <form action="/home" method="post">
             <input type="hidden" name="lat" th:value="${weather.lat}">
             <input type="hidden" name="lon" th:value="${weather.lon}">
@@ -46,6 +48,10 @@
 <div th:if="${login == null}">
     <form action="/sign-in" method="get">
         <button type="submit">Login</button>
+    </form>
+
+    <form action="/sign-up" method="get">
+        <button type="submit">Sign-up</button>
     </form>
 </div>
 </body>

@@ -6,41 +6,42 @@
 </head>
 <body>
 
-<!--<div th:if="${login != null}">-->
-    <p>Welcome, <span th:text="${login}">User</span>!</p>
-    <form action="/logout" method="post">
-        <button type="submit">Logout</button>
-    </form>
+<p>Welcome, <span th:text="${login}">User</span>!</p>
+<form action="/logout" method="post">
+    <button type="submit">Logout</button>
+</form>
 
-    <h2>Weather Information for <span th:text="${city_name}">city</span></h2>
-    <table>
-        <thead>
-        <tr>
-            <th>Name</th>
-            <th>Country</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="weather : ${weathers}">
-            <td th:text="${weather.name}">Name</td>
-            <td th:text="${weather.country}">Country</td>
-            <td>
-                <form action="/locations" method="post">
-                    <input type="hidden" name="lat" th:value="${weather.lat}">
-                    <input type="hidden" name="lon" th:value="${weather.lon}">
-                    <input type="hidden" name="name" th:value="${weather.name}">
-                    <button type="submit">Add to favorites</button>
-                </form>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-<!--</div>-->
+<form action="/home" method="get">
+    <button type="submit">Back</button>
+</form>
 
-<!--<div th:if="${login == null}">-->
-<!--    <form action="/sign-in" method="get">-->
-<!--        <button type="submit">Login</button>-->
-<!--    </form>-->
-<!--</div>-->
+<h2>Weather Information for <span th:text="${city_name}">city</span></h2>
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Country</th>
+        <th>Lat</th>
+        <th>Lon</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="weather : ${weathers}">
+        <td th:text="${weather.name}">Name</td>
+        <td th:text="${weather.country}">Country</td>
+        <td th:text="${weather.lat}">Lat</td>
+        <td th:text="${weather.lon}">Lon</td>
+        <td>
+            <form action="/locations" method="post">
+                <input type="hidden" name="lat" th:value="${weather.lat}">
+                <input type="hidden" name="lon" th:value="${weather.lon}">
+                <input type="hidden" name="name" th:value="${weather.name}">
+                <button type="submit">Add to favorites</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
 </body>
 </html>
