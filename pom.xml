@@ -22,6 +22,11 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>3.4.0</version>
+
+                <configuration>
+                    <outputDirectory>${project.build.directory}</outputDirectory>
+                    <warName>weather_tracker</warName>
+                </configuration>
             </plugin>
         </plugins>
     </build>

@@ -10,3 +10,17 @@ services:
       POSTGRES_PASSWORD: vlad
     ports:
       - "5432:5432"
+
+  web:
+    build: .
+    container_name: java_web_app
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: postgres
+      DB_USER: vlad
+      DB_PASSWORD: vlad
