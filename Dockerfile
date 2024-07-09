@@ -7,8 +7,8 @@ WORKDIR /usr/local/tomcat
 # Удаляем стандартное приложение Tomcat
 RUN rm -rf webapps/*
 
-# Копируем ваш WAR файл в контейнер
-COPY weather_tracker.war webapps/
+# Копируем ваш ROOT.war файл в контейнер
+COPY ROOT.war webapps/
 
 # Открываем порт 8080 для доступа к Tomcat
 EXPOSE 8080
