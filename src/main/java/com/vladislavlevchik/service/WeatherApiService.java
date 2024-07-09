@@ -42,6 +42,8 @@ public class WeatherApiService {
 
     public List<WeatherApiResponseDirectDto> getGeoLocationInfo(String city) throws IOException {
         try {
+            city = fillSpaces(city);
+
             URI uri = buildURI(city);
 
             HttpRequest req = buildRequest(uri);
@@ -73,6 +75,14 @@ public class WeatherApiService {
             throw new WeatherInfoException();
         }
 
+    }
+
+    public String fillSpaces(String cityName) {
+        if (cityName.contains(" ")) {
+            cityName = cityName.replaceAll(" ", "%20");
+        }
+
+        return cityName;
     }
 
     private HttpRequest buildRequest(URI uri) {
