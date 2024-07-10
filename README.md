@@ -1,6 +1,7 @@
 # Tennis Scoreboard
 
-![Overview](image-1.png)
+![Overview](https://github.com/VladislavLevchikIsAProger/weather_tracker/assets/153897612/5919a763-bea5-4332-9319-a6942143dfdb)
+
 ## Overview
 Web application for viewing the current weather. The user can register and add one or more locations (cities, villages, other points) to the collection, after which the main page of the application starts displaying the list of locations with their current weather.. The idea is taken from [here](https://zhukovsd.github.io/java-backend-learning-course/Projects/WeatherViewer/)
 
@@ -62,7 +63,7 @@ Web application for viewing the current weather. The user can register and add o
 
 ## Database diagram
 
-![diagram](image-4.png)
+![diagram](https://github.com/VladislavLevchikIsAProger/weather_tracker/assets/153897612/06eab789-15ed-4dd5-b29a-70d48b3fd80a)
 
 ## Requirements
   + Java 17+
@@ -74,33 +75,56 @@ Web application for viewing the current weather. The user can register and add o
 
 ## Project launch
 
-1. Clone the repository:
++ Clone the repository:
+
    ```
    git clone https://github.com/VladislavLevchikIsAProger/weather_tracker.git
    ```
-
-2. Open Intellij IDEA and in Main Menu -> Open select the folder you have decloned.
-   
-3. In Intellij IDEA, select Run -> Edit Configuration.
++ Open your cloned repository folder in Intellij IDEA
   
-4. In the pop-up window, click "+" and add Tomcat :
++ Open the console(Alt + F12) and type `docker-compose -f docker-compose.dev.yml up -d`
+  
+  ![Screen-cmd](https://github.com/VladislavLevchikIsAProger/weather_tracker/assets/153897612/c2db9f1a-7b9e-4762-8fba-ee70cd3f49a7)
+
++ Go to Database in Intellij IDEA and select PostgreSQL
+
+  ![Screen-database-idea](https://github.com/VladislavLevchikIsAProger/weather_tracker/assets/153897612/a61c52ad-7ba6-4a92-a98d-7301599b315f)
+
++ Then set the settings as shown in the picture(login:vlad, password:vlad) and click Apply
+  
+  ![Screen-settings-postgres](https://github.com/VladislavLevchikIsAProger/weather_tracker/assets/153897612/e0e064fd-aa5b-4fc5-8c64-acd60cf75188)
+
++ Copy the sql script from src/main/resources/data
+
+  ![Screen-init-sqript](https://github.com/VladislavLevchikIsAProger/weather_tracker/assets/153897612/cfbd80c3-81d9-4b42-ad8a-a31a9d8fcb9a)
+
++ Open Query console and paste the copied script code, then press Ctrl + A then Ctrl + Enter
+
+  ![Screen-open-console](https://github.com/VladislavLevchikIsAProger/weather_tracker/assets/153897612/12ab6f7d-55b7-4b9c-af74-9018dbf5923f)
+
++ Open the config.properties file and insert your OpenWeatherAPI key there instead of YOUR_KEY
+
+  ![image](https://github.com/VladislavLevchikIsAProger/weather_tracker/assets/153897612/b6703691-ac47-4c3c-96b6-64fa8aa551b5)
+
++ In Intellij IDEA, select Run -> Edit Configuration. In the pop-up window, click "+" and add Tomcat :
    
     ![Add tomcat](https://github.com/VladislavLevchikIsAProger/tennis_scoreboard/assets/153897612/66f677af-ce05-4676-8dc7-09bc8cbf5db5)
 
-5. Then click "Fix" : 
++ Then click "Fix" : 
 
-    ![Fix botton](https://github.com/VladislavLevchikIsAProger/currency_exchange/assets/153897612/516b7afb-42ef-4374-b96e-2a49d3f866c9)
+    ![Fix](https://github.com/VladislavLevchikIsAProger/weather_tracker/assets/153897612/a494e8f2-b579-45df-a006-084c123b3cc9)
 
-6. In the window that pops up, select :
+
++ In the window that pops up, select :
 
    ![War exploded](https://github.com/VladislavLevchikIsAProger/tennis_scoreboard/assets/153897612/f9c8ffed-8f6f-41a7-8fe7-3e0cab9708d4)
 
 
-7. In the Application context leave the following :
++ In the Application context leave the following :
    
    ![Application context](https://github.com/VladislavLevchikIsAProger/currency_exchange/assets/153897612/895091c7-dd29-49b9-8edc-c9b5f29cf018)
 
-8. Click Apply and start Tomcat
++ Click Apply and start Tomcat
 
 ## Communication
 My Telegram - https://t.me/IamNotARapperr
