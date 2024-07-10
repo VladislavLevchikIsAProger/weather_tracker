@@ -10,19 +10,29 @@ Web application for viewing the current weather. The user can register and add o
 ### Backend
 
 ![java-logo](https://github.com/VladislavLevchikIsAProger/tennis_scoreboard/assets/153897612/bc1ab298-7a78-42ec-8813-05b38668310e)
-![hibernate-logo](https://github.com/VladislavLevchikIsAProger/tennis_scoreboard/assets/153897612/071df0a5-79ef-4435-9c98-5a9b2383d420)
 ![jakarta-logo](https://github.com/VladislavLevchikIsAProger/tennis_scoreboard/assets/153897612/0d339161-2abb-419e-9918-e6347b7c686e)
+![hibernate-logo](https://github.com/VladislavLevchikIsAProger/tennis_scoreboard/assets/153897612/071df0a5-79ef-4435-9c98-5a9b2383d420)
+![postgresql](https://github.com/VladislavLevchikIsAProger/weather_tracker/assets/153897612/8922bdba-ad57-4d69-b68c-ec505fff82e0)
 ![maven-logo](https://github.com/VladislavLevchikIsAProger/tennis_scoreboard/assets/153897612/159c5f30-83db-49a2-906a-fc92a071eeff)
+![opeanweatherapi](https://github.com/VladislavLevchikIsAProger/weather_tracker/assets/153897612/78bce6ce-0faf-4d08-bf48-cc12cea9cc83)
 
 ### Testing
 
 ![junit-logo](https://github.com/VladislavLevchikIsAProger/tennis_scoreboard/assets/153897612/a1a05826-fecb-4b7a-827c-946ffc72da32)
+![mockito](https://github.com/VladislavLevchikIsAProger/weather_tracker/assets/153897612/c405a582-b268-4b82-b3e8-461d77b7f39c)
 ![h2-logo](https://github.com/VladislavLevchikIsAProger/tennis_scoreboard/assets/153897612/3e65f8a8-a9a7-44bc-85c8-42d173338c74)
 
 ### Frontend
 
+![thymeleaf](https://github.com/VladislavLevchikIsAProger/weather_tracker/assets/153897612/5c5cda5f-c5d6-42c8-893b-3737e8d04db2)
 ![html-logo](https://github.com/VladislavLevchikIsAProger/tennis_scoreboard/assets/153897612/cf73900e-a565-405d-b7dd-cc05f9429c2f)
 ![css-logo](https://github.com/VladislavLevchikIsAProger/tennis_scoreboard/assets/153897612/d7d9ecf6-1cfb-4fe1-ba32-dd43d59921a8)
+
+### Deploy
+
+![dockerfile](https://github.com/VladislavLevchikIsAProger/weather_tracker/assets/153897612/e22a80da-ca5a-438b-a5f5-605393f3208d)
+![docker-compose](https://github.com/VladislavLevchikIsAProger/weather_tracker/assets/153897612/82390fb8-e6d4-4b15-b175-78eead5bc360)
+
 
 ## Database diagram
 
