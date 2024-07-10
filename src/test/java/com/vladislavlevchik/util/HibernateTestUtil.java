@@ -3,7 +3,6 @@ package com.vladislavlevchik.util;
 import com.vladislavlevchik.entity.Location;
 import com.vladislavlevchik.entity.Session;
 import com.vladislavlevchik.entity.User;
-import com.vladislavlevchik.utils.HibernateUtil;
 import lombok.Getter;
 import lombok.experimental.UtilityClass;
 import org.hibernate.SessionFactory;

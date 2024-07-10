@@ -12,7 +12,6 @@ import java.io.IOException;
 
 import static com.vladislavlevchik.utils.ValidationUtil.validate;
 
-
 @WebServlet("/sign-up")
 public class SignUpServlet extends WeatherTrackerBaseServlet {
 

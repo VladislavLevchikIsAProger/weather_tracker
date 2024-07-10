@@ -28,7 +28,7 @@ public class HomeAndLocationsHandlingFilter extends HttpFilter {
             super.doFilter(req, res, chain);
         } catch (AuthorizationException e) {
             templateEngine.process("home", context, res.getWriter());
-        } catch (DuplicateLocationException e){
+        } catch (DuplicateLocationException e) {
             res.sendRedirect("home");
         }
     }

@@ -1,4 +1,4 @@
 package com.vladislavlevchik.exception.api;
 
-public class EmptyBodyException extends RuntimeException{
+public class EmptyBodyException extends RuntimeException {
 }

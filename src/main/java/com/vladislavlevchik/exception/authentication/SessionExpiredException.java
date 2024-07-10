@@ -1,4 +1,4 @@
 package com.vladislavlevchik.exception.authentication;
 
-public class SessionExpiredException extends AuthorizationException{
+public class SessionExpiredException extends AuthorizationException {
 }

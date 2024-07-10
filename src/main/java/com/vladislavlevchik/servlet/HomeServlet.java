@@ -1,7 +1,6 @@
 package com.vladislavlevchik.servlet;
 
 import com.vladislavlevchik.dto.CoordinatesRequestDto;
-import com.vladislavlevchik.dto.LocationRequestDto;
 import com.vladislavlevchik.dto.WeatherResponseDto;
 import com.vladislavlevchik.entity.Session;
 import jakarta.servlet.ServletException;

@@ -16,7 +16,7 @@ import static java.lang.Double.parseDouble;
 @WebServlet("/locations")
 public class LocationsServlet extends WeatherTrackerBaseServlet {
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String sessionId = authenticationService.findSessionIdCookie(req.getCookies()).getValue();
 
         Session session = authenticationService.getSessionIfValid(sessionId);

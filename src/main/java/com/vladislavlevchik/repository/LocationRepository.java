@@ -2,13 +2,12 @@ package com.vladislavlevchik.repository;
 
 import com.vladislavlevchik.entity.Location;
 import com.vladislavlevchik.exception.DuplicateLocationException;
-import com.vladislavlevchik.utils.HibernateUtil;
 import jakarta.persistence.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.exception.ConstraintViolationException;
 
-public class LocationRepository extends BaseRepository<Location>{
+public class LocationRepository extends BaseRepository<Location> {
     public LocationRepository(SessionFactory sessionFactory) {
         super(sessionFactory);
     }

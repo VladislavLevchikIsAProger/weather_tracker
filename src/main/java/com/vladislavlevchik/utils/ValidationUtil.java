@@ -12,12 +12,12 @@ public class ValidationUtil {
     private static final String PASSWORD_VALIDATION_REGEX = "^(?=.*[0-9])(?=.*[a-zA-Z])[a-zA-Z0-9]+$";
 
 
-    public static void validate(UserRequestDto user){
-        if(!user.getLogin().matches(LOGIN_VALIDATION_REGEX)){
+    public static void validate(UserRequestDto user) {
+        if (!user.getLogin().matches(LOGIN_VALIDATION_REGEX)) {
             throw new InvalidLoginException();
         }
 
-        if (!user.getPassword().matches(PASSWORD_VALIDATION_REGEX)){
+        if (!user.getPassword().matches(PASSWORD_VALIDATION_REGEX)) {
             throw new InvalidPasswordException();
         }
     }

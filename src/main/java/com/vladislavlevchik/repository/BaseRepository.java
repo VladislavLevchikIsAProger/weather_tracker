@@ -5,9 +5,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.exception.ConstraintViolationException;
 
-import java.util.Optional;
-import java.util.UUID;
-
 public abstract class BaseRepository<T> {
 
     protected final SessionFactory sessionFactory;
