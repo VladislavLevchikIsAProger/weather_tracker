@@ -117,8 +117,7 @@ Web application for viewing the current weather. The user can register and add o
 
 + In the window that pops up, select :
 
-   ![War exploded](https://github.com/VladislavLevchikIsAProger/tennis_scoreboard/assets/153897612/f9c8ffed-8f6f-41a7-8fe7-3e0cab9708d4)
-
+   ![War](https://github.com/VladislavLevchikIsAProger/weather_tracker/assets/153897612/597e661f-fc6c-4658-bb01-4c8d6ffb7bc4)
 
 + In the Application context leave the following :
    
